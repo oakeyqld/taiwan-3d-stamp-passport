@@ -1,0 +1,80 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+  body {
+    @apply bg-passport-900 font-sans text-slate-800 antialiased;
+    overscroll-behavior: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+  button:focus-visible,
+  input:focus-visible,
+  select:focus-visible {
+    outline: 2px solid #c9a35a;
+    outline-offset: 2px;
+  }
+}
+
+@layer components {
+  /* 米紙內頁：淡淡的防偽紋 */
+  .rice-paper {
+    background-color: #f7f2e4;
+    background-image:
+      radial-gradient(circle at 20% 15%, rgba(201, 163, 90, 0.08), transparent 40%),
+      radial-gradient(circle at 85% 80%, rgba(31, 61, 43, 0.06), transparent 45%),
+      repeating-linear-gradient(45deg, rgba(31, 61, 43, 0.025) 0 1px, transparent 1px 9px),
+      repeating-linear-gradient(-45deg, rgba(201, 37, 44, 0.02) 0 1px, transparent 1px 11px);
+  }
+  .scrollbar-none {
+    scrollbar-width: none;
+  }
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* 列印：只印出成就證書 */
+@media print {
+  @page {
+    size: A4 landscape;
+    margin: 0;
+  }
+  body {
+    background: #fff !important;
+  }
+  body * {
+    visibility: hidden !important;
+  }
+  #certificate-print,
+  #certificate-print * {
+    visibility: visible !important;
+  }
+  #certificate-print {
+    position: fixed !important;
+    left: 50% !important;
+    top: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    box-shadow: none !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .no-print {
+    display: none !important;
+  }
+}
